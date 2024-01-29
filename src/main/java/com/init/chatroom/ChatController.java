@@ -29,6 +29,8 @@ public class ChatController {
         chatMessage.setType(ChatMessage.MessageType.JOIN);
         // Add username in web socket session
         headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
+        headerAccessor.getSessionAttributes().put("roomName", chatMessage.getRoomName());
+        headerAccessor.getSessionAttributes().put("roomCode", chatMessage.getRoomCode());
 
         simpMessagingTemplate.convertAndSend("/topic/"+chatMessage.getRoomName()+"/"
                 +chatMessage.getRoomCode(),chatMessage);
